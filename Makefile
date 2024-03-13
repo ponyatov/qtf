@@ -39,3 +39,51 @@ tmp/format_c: $(C) $(H)
 # rule
 bin/$(MODULE): $(C) $(H)
 	$(CXX) $(CFLAGS) -o $@ $(C) $(L)
+
+# doc
+# doc
+doxy: .doxygen
+	rm -rf docs ; doxygen $< 1>/dev/null
+
+.PHONY: doc
+doc:
+
+# install
+.PHONY: install update gz ref
+install: doc gz
+	$(MAKE) update
+update:
+	sudo apt update
+	sudo apt install -yu `cat apt.txt`
+gz:
+
+# merge
+MERGE += Makefile README.md apt.txt LICENSE
+MERGE += .clang-format .doxygen .gitignore
+MERGE += .vscode bin doc lib inc src tmp ref
+
+.PHONY: dev
+dev:
+	git push -v
+	git checkout $@
+	git pull -v
+	git checkout shadow -- $(MERGE)
+
+.PHONY: shadow
+shadow:
+	git push -v
+	git checkout $@
+	git pull -v
+
+.PHONY: release
+release:
+	git tag $(NOW)-$(REL)
+	git push -v --tags
+	$(MAKE) shadow
+
+.PHONY: zip
+zip:
+	git archive \
+		--format zip \
+		--output $(TMP)/$(MODULE)_$(NOW)_$(REL).src.zip \
+	HEAD
