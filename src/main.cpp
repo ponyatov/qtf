@@ -9,6 +9,8 @@ int main(int argc, char* argv[]) {
         assert(src = fopen(argv[i], "r"));
         fclose(src);
     }
+    QLabel lbl("Hello, World");
+    lbl.show();
     return app.exec();
 }
 

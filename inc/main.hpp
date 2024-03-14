@@ -6,6 +6,7 @@
 #include <assert.h>
 
 #include <QApplication>
+#include <QLabel>
 
 /// @defgroup main main
 /// @{
