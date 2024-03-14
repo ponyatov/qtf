@@ -37,13 +37,11 @@ tmp/format_c: $(C) $(H)
 	$(CF) -style=file -i $? && touch $@
 
 # rule
-bin/$(MODULE): $(C) $(H) tmp/build.mk
+bin/$(MODULE): $(C) $(H) tmp/CMakeCache.txt
 	cmake --build tmp
-tmp/build.mk: $(CWD)/CMakeLists.txt
+tmp/CMakeCache.txt: $(CWD)/CMakeLists.txt
 	cd tmp ; cmake -DAPP=$(MODULE) $<
-# $(CXX) $(CFLAGS) -o $@ $(C) $(L)
 
-# doc
 # doc
 doxy: .doxygen
 	rm -rf docs ; doxygen $< 1>/dev/null
