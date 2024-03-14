@@ -1,6 +1,7 @@
 #include "main.hpp"
 
 int main(int argc, char* argv[]) {
+    QApplication app(argc, argv); 
     arg(0, argv[0]);
     for (int i = 1; i < argc; i++) {  //
         arg(i, argv[i]);
@@ -8,6 +9,7 @@ int main(int argc, char* argv[]) {
         assert(src = fopen(argv[i], "r"));
         fclose(src);
     }
+    return app.exec();
 }
 
 void arg(int argc, char argv[]) {  //

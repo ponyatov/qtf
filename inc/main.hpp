@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <assert.h>
 
+#include <QApplication>
+
 /// @defgroup main main
 /// @{
 

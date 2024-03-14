@@ -37,8 +37,11 @@ tmp/format_c: $(C) $(H)
 	$(CF) -style=file -i $? && touch $@
 
 # rule
-bin/$(MODULE): $(C) $(H)
-	$(CXX) $(CFLAGS) -o $@ $(C) $(L)
+bin/$(MODULE): $(C) $(H) tmp/build.mk
+	cmake --build tmp
+tmp/build.mk: $(CWD)/CMakeLists.txt
+	cd tmp ; cmake -DAPP=$(MODULE) $<
+# $(CXX) $(CFLAGS) -o $@ $(C) $(L)
 
 # doc
 # doc
