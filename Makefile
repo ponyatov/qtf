@@ -23,6 +23,8 @@ CF   = clang-format
 C += $(wildcard src/*.c*)
 H += $(wildcard inc/*.h*)
 
+LEX = $(wildcard src/*.lex) $(wildcard src/*.yacc)
+
 # cfg
 CFLAGS += -I$(INC) -I$(TMP)
 
@@ -37,7 +39,7 @@ tmp/format_c: $(C) $(H)
 	$(CF) -style=file -i $? && touch $@
 
 # rule
-bin/$(MODULE): $(C) $(H) tmp/CMakeCache.txt
+bin/$(MODULE): $(C) $(H) $(LEX) tmp/CMakeCache.txt
 	cmake --build tmp
 tmp/CMakeCache.txt: $(CWD)/CMakeLists.txt
 	cd tmp ; cmake -DAPP=$(MODULE) $<

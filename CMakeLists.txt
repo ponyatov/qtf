@@ -8,25 +8,27 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 file(GLOB C RELATIVE ${CMAKE_SOURCE_DIR} "src/*.c*" "tmp/*.c*")
 file(GLOB H RELATIVE ${CMAKE_SOURCE_DIR} "inc/*.h*" "tmp/*.h*")
 
+# find_package(readline)
+
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui)
 qt_standard_project_setup()
 
 file(GLOB R RELATIVE ${CMAKE_SOURCE_DIR} "inc/*.qrc")
 set(CMAKE_AUTORCC ON)
 
-# find_package(FLEX  REQUIRED)
-# find_package(BISON REQUIRED)
+find_package(FLEX  REQUIRED)
+find_package(BISON REQUIRED)
 
-# FLEX_TARGET(lexer
-#     ${CMAKE_SOURCE_DIR}/src/${APP}.lex
-#                  ${CMAKE_SOURCE_DIR}/tmp/${APP}.lexer.cpp
-#     DEFINES_FILE ${CMAKE_SOURCE_DIR}/tmp/${APP}.lexer.hpp)
+FLEX_TARGET(lexer
+    ${CMAKE_SOURCE_DIR}/src/${APP}.lex
+                 ${CMAKE_SOURCE_DIR}/tmp/${APP}.lexer.cpp
+    DEFINES_FILE ${CMAKE_SOURCE_DIR}/tmp/${APP}.lexer.hpp)
 
-# BISON_TARGET(parser
-#     ${CMAKE_SOURCE_DIR}/src/${APP}.yacc
-#                  ${CMAKE_SOURCE_DIR}/tmp/${APP}.parser.cpp)
+BISON_TARGET(parser
+    ${CMAKE_SOURCE_DIR}/src/${APP}.yacc
+                 ${CMAKE_SOURCE_DIR}/tmp/${APP}.parser.cpp)
 
-# add_flex_bison_dependency(lexer parser)
+add_flex_bison_dependency(lexer parser)
 
 include_directories(
     "${CMAKE_SOURCE_DIR}/inc"

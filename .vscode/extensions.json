@@ -10,9 +10,9 @@
         // C++
         "ms-vscode.cpptools",
         "jeff-hykin.better-cpp-syntax",
-        // "ms-vscode.cmake-tools",
+        "ms-vscode.cmake-tools",
         // flex/bison
-        // "daohong-emilio.yash",
+        "daohong-emilio.yash",
         // LLVM
         // "rreverser.llvm",
         // "basdp.language-gas-x86",

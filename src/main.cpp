@@ -7,6 +7,8 @@ int main(int argc, char* argv[]) {
         arg(i, argv[i]);
         FILE* src = NULL;
         assert(src = fopen(argv[i], "r"));
+        yyset_in(src);
+        yyparse();
         fclose(src);
     }
     QLabel lbl("Hello, World");
@@ -16,4 +18,9 @@ int main(int argc, char* argv[]) {
 
 void arg(int argc, char argv[]) {  //
     printf("argv[%i] = <%s>\n", argc, argv);
+}
+
+extern void yyerror(std::string msg) {
+    std::cerr << msg << std::endl;
+    exit(-1);
 }
