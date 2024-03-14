@@ -5,8 +5,9 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#include <QApplication>
-#include <QLabel>
+#include <QtWidgets>
+// #include <QApplication>
+// #include <QLabel>
 
 /// @defgroup main main
 /// @{

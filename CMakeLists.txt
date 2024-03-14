@@ -42,3 +42,5 @@ qt_add_executable(${APP}
 )
 
 target_link_libraries(${APP} PRIVATE Qt6::Core Qt6::Widgets)
+
+target_precompile_headers(${APP} PRIVATE ${H} )
