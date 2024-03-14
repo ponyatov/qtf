@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.11)
 
 project(${APP} VERSION 0.0.1 LANGUAGES C CXX)
 
+set(CMAKE_CXX_STANDARD          17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 file(GLOB C RELATIVE ${CMAKE_SOURCE_DIR} "src/*.c*" "tmp/*.c*")
 file(GLOB H RELATIVE ${CMAKE_SOURCE_DIR} "inc/*.h*" "tmp/*.h*")
 
@@ -41,6 +44,7 @@ qt_add_executable(${APP}
     ${FLEX_lexer_OUTPUTS} ${BISON_parser_OUTPUTS}
 )
 
+target_link_libraries(${APP} PRIVATE dl readline)
 target_link_libraries(${APP} PRIVATE Qt6::Core Qt6::Widgets)
 
 target_precompile_headers(${APP} PRIVATE ${H} )

@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <assert.h>
 
+#include <readline/readline.h>
+#include <readline/history.h>
+
 #include <QtWidgets>
 // #include <QApplication>
 // #include <QLabel>
