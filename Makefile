@@ -40,9 +40,9 @@ tmp/format_c: $(C) $(H)
 
 # rule
 bin/$(MODULE): $(C) $(H) $(LEX) tmp/CMakeCache.txt
-	cmake --build tmp
-tmp/CMakeCache.txt: $(CWD)/CMakeLists.txt
-	cd tmp ; cmake -DAPP=$(MODULE) $<
+	cmake --build build
+tmp/CMakeCache.txt: $(CWD)/CMakeLists.txt $(C) $(H) Makefile
+	mkdir -p build ; cd build ; cmake -DAPP=$(MODULE) $(CWD)
 
 # doc
 doxy: .doxygen

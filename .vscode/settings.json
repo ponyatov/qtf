@@ -39,6 +39,8 @@
     },
     "C_Cpp.intelliSenseEngine":    "Tag Parser",
 
+    "cmake.configureSettings": {"APP":"qtf"},
+
     // clang-format
     "clang-format.executable":    "clang-format",
     "clang-format.fallbackStyle": "Google",

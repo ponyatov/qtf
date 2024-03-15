@@ -1,5 +1,6 @@
 %{
     #include "main.hpp"
+    #include "qtf.lexer.hpp"
 %}
 
 %option yylineno noyywrap

@@ -1,5 +1,6 @@
 %{
     #include "main.hpp"
+    #include "qtf.lexer.hpp"
 %}
 
 %defines %union { float f; int n; std::string *s; }

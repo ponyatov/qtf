@@ -3,3 +3,4 @@ rc
 bin/**
 fw/**
 tmp/**
+build/**
