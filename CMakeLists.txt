@@ -50,4 +50,5 @@ add_executable(${APP}
 target_link_libraries(${APP} PRIVATE dl readline)
 target_link_libraries(${APP} PRIVATE Qt5::Core Qt5::Widgets Qt5::Gui)
 
-target_precompile_headers(${APP} PRIVATE ${H} )
+# disabled due to flex lexer error
+# target_precompile_headers(${APP} PRIVATE ${H} )

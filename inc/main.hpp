@@ -40,7 +40,6 @@ extern char* yytext;
 extern void yyset_in(FILE*);
 extern int yyparse();
 extern void yyerror(std::string msg);
-#include "qtf.lexer.hpp"
 #include "qtf.parser.hpp"
 
 /// @}
