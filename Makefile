@@ -48,7 +48,10 @@ doxy: .doxygen
 	rm -rf docs ; doxygen $< 1>/dev/null
 
 .PHONY: doc
-doc:
+doc: doc/Shlee_Qt_4_8.pdf
+
+doc/Shlee_Qt_4_8.pdf:
+	$(CURL) $@ http://cosmic-rays.ru/books61/Shlee_Qt_4_8.pdf
 
 # install
 .PHONY: install update gz ref
