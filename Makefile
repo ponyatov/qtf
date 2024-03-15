@@ -7,13 +7,14 @@ BRANCH  = $(shell git rev-parse --abbrev-ref HEAD)
 CORES  ?= $(shell grep processor /proc/cpuinfo | wc -l)
 
 # dir
-CWD  = $(CURDIR)
-BIN  = $(CWD)/bin
-INC  = $(CWD)/inc
-SRC  = $(CWD)/src
-TMP  = $(CWD)/tmp
-REF  = $(CWD)/ref
-GZ   = $(HOME)/gz
+CWD   = $(CURDIR)
+BIN   = $(CWD)/bin
+INC   = $(CWD)/inc
+SRC   = $(CWD)/src
+TMP   = $(CWD)/tmp
+REF   = $(CWD)/ref
+GZ    = $(HOME)/gz
+BUILD = $(CWD)/build
 
 # tool
 CURL = curl -L -o
@@ -39,10 +40,8 @@ tmp/format_c: $(C) $(H)
 	$(CF) -style=file -i $? && touch $@
 
 # rule
-bin/$(MODULE): $(C) $(H) $(LEX) tmp/CMakeCache.txt
-	cmake --build build
-tmp/CMakeCache.txt: $(CWD)/CMakeLists.txt $(C) $(H) Makefile
-	mkdir -p build ; cd build ; cmake -DAPP=$(MODULE) $(CWD)
+bin/$(MODULE): $(C) $(H) $(LEX) $(CWD)/CMakeLists.txt Makefile
+	cmake -DAPP=$(MODULE) -S$(CWD) -B$(BUILD) build
 
 # doc
 doxy: .doxygen

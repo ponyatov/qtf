@@ -39,7 +39,8 @@
     },
     "C_Cpp.intelliSenseEngine":    "Tag Parser",
 
-    "cmake.configureSettings": {"APP":"qtf"},
+    // cmake
+    "cmake.configureSettings": {"APP": "${workspaceFolderBasename}"},
 
     // clang-format
     "clang-format.executable":    "clang-format",
