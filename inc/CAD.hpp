@@ -13,4 +13,10 @@ class CAD : public QObject {
     CAD(QObject* pobj = NULL) : QObject(pobj), visible(false) {}
     bool isVisible() { return visible; }
     void setVisible(bool visible) { this->visible = visible; }
+
+   signals:
+    void sync();
+
+   public slots:
+    void slot() { qDebug() << sender()->objectName(); }
 };

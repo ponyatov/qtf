@@ -1,7 +1,5 @@
 #include "main.hpp"
 
-#include "CAD.hpp"
-
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
     arg(0, argv[0]);

@@ -13,6 +13,9 @@
 // #include <QtWidgets>
 #include <QApplication>
 #include <QLabel>
+#include <QDebug>
+
+#include "CAD.hpp"
 
 /// @defgroup main main
 /// @{
