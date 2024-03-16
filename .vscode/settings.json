@@ -41,6 +41,16 @@
 
     // cmake
     "cmake.configureSettings": {"APP": "${workspaceFolderBasename}"},
+    "cmake.sourceDirectory"  : "${workspaceFolder}",
+    "cmake.buildDirectory"   : "${workspaceFolder}/tmp/build",
+	"cmake.generator"        : "Unix Makefiles",
+    "cmake.configureOnOpen"  : false,
+    "cmake.debugConfig"      : {
+        "cwd": "${workspaceFolder}",
+        "args": [
+            "${workspaceFolder}/lib/${workspaceFolderBasename}.ini"
+        ]},
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
 
     // clang-format
     "clang-format.executable":    "clang-format",

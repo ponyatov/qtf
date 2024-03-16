@@ -14,7 +14,7 @@ SRC   = $(CWD)/src
 TMP   = $(CWD)/tmp
 REF   = $(CWD)/ref
 GZ    = $(HOME)/gz
-BUILD = $(CWD)/build
+BUILD = $(TMP)/build
 
 # tool
 CURL = curl -L -o

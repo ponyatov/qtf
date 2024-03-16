@@ -11,7 +11,8 @@ file(GLOB H RELATIVE ${CMAKE_SOURCE_DIR} "inc/*.h*" "tmp/*.h*")
 # find_package(readline)
 
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Gui)
-# qt_standard_project_setup()
+set(CMAKE_AUTOMOC ON)
+# qt_standard_project_setup() # qt6
 
 file(GLOB R RELATIVE ${CMAKE_SOURCE_DIR} "inc/*.qrc")
 set(CMAKE_AUTORCC ON)
@@ -42,7 +43,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 add_link_options("-Wl,-E") # dl
 
 add_executable(${APP}
-# qt_add_executable(${APP}
+# qt_add_executable(${APP} # qt6
     ${C} ${H} ${R}
     ${FLEX_lexer_OUTPUTS} ${BISON_parser_OUTPUTS}
 )
