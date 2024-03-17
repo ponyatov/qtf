@@ -1,8 +1,11 @@
 #include "main.hpp"
 
+QApplication* app = nullptr;
+MainWindow* win = nullptr;
+
 int main(int argc, char* argv[]) {
-    QApplication app(argc, argv);
     arg(0, argv[0]);
+    assert(app = new QApplication(argc, argv));
     for (int i = 1; i < argc; i++) {  //
         arg(i, argv[i]);
         FILE* src = NULL;
@@ -11,10 +14,12 @@ int main(int argc, char* argv[]) {
         yyparse();
         fclose(src);
     }
-    QLabel lbl("Hello, World");
-    lbl.show();
-    std::cout << new CAD << std::endl;
-    return app.exec();
+    assert(win = new MainWindow(argv[0]));
+    win->show();
+
+    QObject::connect(win, SIGNAL(clicked()), app, SLOT(quit()));
+
+    return app->exec();
 }
 
 void arg(int argc, char argv[]) {  //

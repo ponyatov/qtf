@@ -13,9 +13,14 @@
 // #include <QtWidgets>
 #include <QApplication>
 #include <QLabel>
+#include <QPushButton>
 #include <QDebug>
+#include <QMainWindow>
+#include <QMenuBar>
+#include <QMenu>
 
 #include "CAD.hpp"
+#include "MainWindow.hpp"
 
 /// @defgroup main main
 /// @{
@@ -29,7 +34,7 @@ extern void arg(int argc, char argv[]);
 /// @param[in] argc number of command line arguments +1
 /// @param[in] argv array of command line arguments
 /// @return
-extern int main(int argc, char* argv[]);
+extern int main(int argc, char *argv[]);
 
 /// @}
 
@@ -39,8 +44,8 @@ extern int main(int argc, char* argv[]);
 
 extern int yylex();
 extern int yylineno;
-extern char* yytext;
-extern void yyset_in(FILE*);
+extern char *yytext;
+extern void yyset_in(FILE *);
 extern int yyparse();
 extern void yyerror(std::string msg);
 #include "qtf.parser.hpp"

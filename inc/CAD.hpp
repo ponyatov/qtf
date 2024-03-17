@@ -8,9 +8,11 @@ class CAD : public QObject {
 
    private:
     bool visible;
+    QString name;
 
    public:
-    CAD(QObject* pobj = NULL) : QObject(pobj), visible(false) {}
+    CAD(QString name = "", QObject* pobj = NULL)
+        : QObject(pobj), name(name), visible(false) {}
     bool isVisible() { return visible; }
     void setVisible(bool visible) { this->visible = visible; }
 
