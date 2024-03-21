@@ -7,11 +7,24 @@
                 "${workspaceFolder}/src/**",
                 "${workspaceFolder}/tmp/**"
             ],
-            "defines": [],
+            "defines": ["Linux"],
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "linux-gcc-x64",
-            "compilerPath": "/usr/bin/gcc"
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "intelliSenseMode": "linux-gcc-x64"
+        },
+        {
+            "name": "Windows",
+            "includePath": [
+                "/home/dponyatov/noc/inc/**",
+                "/home/dponyatov/noc/src/**",
+                "/home/dponyatov/noc/tmp/**"
+            ],
+            "defines": ["Windows"],
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "intelliSenseMode": "windows-gcc-x86"
         }
     ],
     "version": 4

@@ -25,5 +25,15 @@
             "command": "make dev",
             "problemMatcher": []
         },
+        {
+            "label": "target: win32",
+            "type": "shell",
+            "command": "make tmp/${workspaceFolderBasename}.exe",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
     ]
 }

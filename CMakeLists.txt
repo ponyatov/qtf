@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.11)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
 
+# use -DCMAKE_TOOLCHAIN_FILE in cmd.line
+# include(Windows_)
+# include(Linux_)
+
 project(${APP} VERSION 0.0.1 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD          17)
@@ -12,15 +16,12 @@ file(GLOB H RELATIVE ${CMAKE_SOURCE_DIR} "inc/*.h*" "tmp/*.h*")
 
 include(Qt)
 
-file(GLOB R RELATIVE ${CMAKE_SOURCE_DIR} "inc/*.qrc")
-set(CMAKE_AUTORCC ON)
-
 include(skelex)
 
 include_directories(
     "${CMAKE_SOURCE_DIR}/inc"
     "${CMAKE_SOURCE_DIR}/tmp"
-    ${READLINE_INCLUDE_DIR}
+    # ${READLINE_INCLUDE_DIR}
 )
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)

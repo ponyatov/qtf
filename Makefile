@@ -7,6 +7,8 @@ REL     = $(shell git rev-parse --short=4 HEAD)
 BRANCH  = $(shell git rev-parse --abbrev-ref HEAD)
 CORES  ?= $(shell grep processor /proc/cpuinfo | wc -l)
 
+WINHOST = 192.168.0.111
+
 # dir
 CWD   = $(CURDIR)
 BIN   = $(CWD)/bin
@@ -36,20 +38,26 @@ CFLAGS += -I$(INC) -I$(TMP)
 all: bin/$(MODULE) $(F)
 	$^
 
+.PHONY: win
+win: tmp/$(MODULE).exe tmp/$(MODULE).ini
+	vncviewer $(WINHOST)
+
 # format
 format: tmp/format_c
 tmp/format_c: $(C) $(H)
 	$(CF) -style=file -i $? && touch $@
 
 # rule
-bin/$(MODULE).exe: $(C) $(H) $(Y) $(M)
-	rm -rf $(BUILD)
-	cmake -DAPP=$(MODULE) -DCMAKE_SYSTEM_NAME=Windows -S$(CWD) -B$(BUILD)
-	cd $(BUILD) ; make -j$(CORES)
 bin/$(MODULE): $(C) $(H) $(Y) $(M)
 	rm -rf $(BUILD)
-	cmake -DAPP=$(MODULE) -DCMAKE_SYSTEM_NAME=Linux -S$(CWD) -B$(BUILD)
+	cmake -DAPP=$(MODULE) -DCMAKE_TOOLCHAIN_FILE=Linux_ -S$(CWD) -B$(BUILD)
 	cd $(BUILD) ; make -j$(CORES)
+tmp/$(MODULE).exe: $(C) $(H) $(Y) $(M)
+	rm -rf $(BUILD)
+	cmake -DAPP=$(MODULE) -DCMAKE_TOOLCHAIN_FILE=Windows_ -S$(CWD) -B$(BUILD)
+	cd $(BUILD) ; make -j$(CORES)
+tmp/%: lib/%
+	cp $< $@
 
 # doc
 doxy: .doxygen
@@ -63,11 +71,12 @@ doc/Shlee_Qt_4_8.pdf:
 
 # install
 .PHONY: install update gz ref
-install: doc gz
+install: doc gz ref
 	$(MAKE) update
 update:
 	sudo apt update
 	sudo apt install -yu `cat apt.txt`
+ref:
 gz:
 
 # merge

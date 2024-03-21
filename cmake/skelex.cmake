@@ -1,6 +1,6 @@
 find_package(FLEX     REQUIRED)
 find_package(BISON    REQUIRED)
-find_package(READLINE REQUIRED)
+find_package(READLINE         )
 
 FLEX_TARGET(lexer
     ${CMAKE_SOURCE_DIR}/src/${APP}.lex
