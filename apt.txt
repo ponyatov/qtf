@@ -1,4 +1,4 @@
 git make curl
 code meld doxygen clang-format
-g++ flex bison libreadline-dev
-qtbase5-dev qtbase5-dev-tools
+g++ flex bison libreadline-dev cmake
+qt5ct qtbase5-dev qtbase5-dev-tools

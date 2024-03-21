@@ -1,6 +1,7 @@
 # var
 MODULE  = $(notdir $(CURDIR))
 module  = $(shell echo $(MODULE) | tr A-Z a-z)
+OS      = $(shell uname -o|tr / _)
 NOW     = $(shell date +%d%m%y)
 REL     = $(shell git rev-parse --short=4 HEAD)
 BRANCH  = $(shell git rev-parse --abbrev-ref HEAD)
@@ -14,7 +15,7 @@ SRC   = $(CWD)/src
 TMP   = $(CWD)/tmp
 REF   = $(CWD)/ref
 GZ    = $(HOME)/gz
-BUILD = $(TMP)/build
+BUILD = $(CWD)/tmp/build
 
 # tool
 CURL = curl -L -o
@@ -23,15 +24,16 @@ CF   = clang-format
 # src
 C += $(wildcard src/*.c*)
 H += $(wildcard inc/*.h*)
-
-LEX = $(wildcard src/*.lex) $(wildcard src/*.yacc)
+Y += $(wildcard src/*.lex) $(wildcard src/*.yacc)
+F += lib/$(MODULE).ini $(wildcard lib/*.f*)
+M += Makefile CMakeLists.txt $(wildcard cmake/*)
 
 # cfg
 CFLAGS += -I$(INC) -I$(TMP)
 
 # all
 .PHONY: all
-all: bin/$(MODULE) lib/$(MODULE).ini
+all: bin/$(MODULE) $(F)
 	$^
 
 # format
@@ -40,8 +42,14 @@ tmp/format_c: $(C) $(H)
 	$(CF) -style=file -i $? && touch $@
 
 # rule
-bin/$(MODULE): $(C) $(H) $(LEX) $(CWD)/CMakeLists.txt Makefile
-	cmake -DAPP=$(MODULE) -S$(CWD) -B$(BUILD) build
+bin/$(MODULE).exe: $(C) $(H) $(Y) $(M)
+	rm -rf $(BUILD)
+	cmake -DAPP=$(MODULE) -DCMAKE_SYSTEM_NAME=Windows -S$(CWD) -B$(BUILD)
+	cd $(BUILD) ; make -j$(CORES)
+bin/$(MODULE): $(C) $(H) $(Y) $(M)
+	rm -rf $(BUILD)
+	cmake -DAPP=$(MODULE) -DCMAKE_SYSTEM_NAME=Linux -S$(CWD) -B$(BUILD)
+	cd $(BUILD) ; make -j$(CORES)
 
 # doc
 doxy: .doxygen
